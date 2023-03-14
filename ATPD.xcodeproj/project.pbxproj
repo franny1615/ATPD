@@ -13,9 +13,10 @@
 		015A540329C004D9003BFC19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 015A53FB29C004D9003BFC19 /* LaunchScreen.storyboard */; };
 		015A540429C004D9003BFC19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015A53FD29C004D9003BFC19 /* AppDelegate.swift */; };
 		015A540529C004D9003BFC19 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015A53FE29C004D9003BFC19 /* main.swift */; };
-		015A540629C004D9003BFC19 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 015A53FF29C004D9003BFC19 /* Info.plist */; };
 		015A540729C004D9003BFC19 /* ATPD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 015A540029C004D9003BFC19 /* ATPD.xcdatamodeld */; };
-		015A540A29C005A9003BFC19 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 015A540929C005A9003BFC19 /* .gitignore */; };
+		015A540E29C006E9003BFC19 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015A540D29C006E9003BFC19 /* ProjectView.swift */; };
+		015A541029C006F3003BFC19 /* ProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015A540F29C006F3003BFC19 /* ProjectViewModel.swift */; };
+		015A541229C00799003BFC19 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 015A541129C00799003BFC19 /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +40,9 @@
 		015A53FE29C004D9003BFC19 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		015A53FF29C004D9003BFC19 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		015A540129C004D9003BFC19 /* ATPD.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ATPD.xcdatamodel; sourceTree = "<group>"; };
-		015A540929C005A9003BFC19 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		015A540D29C006E9003BFC19 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
+		015A540F29C006F3003BFC19 /* ProjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewModel.swift; sourceTree = "<group>"; };
+		015A541129C00799003BFC19 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +66,7 @@
 		015A53B629C000B0003BFC19 = {
 			isa = PBXGroup;
 			children = (
-				015A540929C005A9003BFC19 /* .gitignore */,
+				015A541129C00799003BFC19 /* .gitignore */,
 				015A53F929C004D9003BFC19 /* ATPD */,
 				015A53DB29C000B1003BFC19 /* ATPDTests */,
 				015A53C029C000B0003BFC19 /* Products */,
@@ -91,14 +94,32 @@
 		015A53F929C004D9003BFC19 /* ATPD */ = {
 			isa = PBXGroup;
 			children = (
+				015A540029C004D9003BFC19 /* ATPD.xcdatamodeld */,
+				015A53FF29C004D9003BFC19 /* Info.plist */,
 				015A53FA29C004D9003BFC19 /* Assets.xcassets */,
 				015A53FB29C004D9003BFC19 /* LaunchScreen.storyboard */,
-				015A53FD29C004D9003BFC19 /* AppDelegate.swift */,
 				015A53FE29C004D9003BFC19 /* main.swift */,
-				015A53FF29C004D9003BFC19 /* Info.plist */,
-				015A540029C004D9003BFC19 /* ATPD.xcdatamodeld */,
+				015A53FD29C004D9003BFC19 /* AppDelegate.swift */,
+				015A540B29C00645003BFC19 /* App */,
 			);
 			path = ATPD;
+			sourceTree = "<group>";
+		};
+		015A540B29C00645003BFC19 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				015A540C29C006CD003BFC19 /* ProjectView */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		015A540C29C006CD003BFC19 /* ProjectView */ = {
+			isa = PBXGroup;
+			children = (
+				015A540D29C006E9003BFC19 /* ProjectView.swift */,
+				015A540F29C006F3003BFC19 /* ProjectViewModel.swift */,
+			);
+			path = ProjectView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,10 +203,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				015A540A29C005A9003BFC19 /* .gitignore in Resources */,
+				015A541229C00799003BFC19 /* .gitignore in Resources */,
 				015A540329C004D9003BFC19 /* LaunchScreen.storyboard in Resources */,
 				015A540229C004D9003BFC19 /* Assets.xcassets in Resources */,
-				015A540629C004D9003BFC19 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,7 +225,9 @@
 			files = (
 				015A540429C004D9003BFC19 /* AppDelegate.swift in Sources */,
 				015A540529C004D9003BFC19 /* main.swift in Sources */,
+				015A540E29C006E9003BFC19 /* ProjectView.swift in Sources */,
 				015A540729C004D9003BFC19 /* ATPD.xcdatamodeld in Sources */,
+				015A541029C006F3003BFC19 /* ProjectViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
