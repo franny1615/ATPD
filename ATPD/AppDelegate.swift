@@ -57,7 +57,7 @@ extension AppDelegate: UISceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        projectViewModel = .init()
+        projectViewModel = .init(projects: [])
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = UIHostingController(rootView: ProjectView(viewmodel: projectViewModel))
         window.makeKeyAndVisible()
