@@ -43,11 +43,6 @@ class ProjectViewModel: ObservableObject {
             return .init(project: selectedProject)
         }
         
-        return .init(project: .init(title: "",
-                                    body: "",
-                                    attachments: NSData(),
-                                    createdOn: Date(),
-                                    changedOn: Date(),
-                                    createdBy: ""))
+        fatalError("not implemented yet")
     }
 }

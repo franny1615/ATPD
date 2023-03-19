@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ProjectView_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectView(viewmodel: .init(projects: [.init(title: "Amazing Cool Project",
+        ProjectView(viewmodel: .init(projects: [.init(title: "Some Amazing Project",
                                                       body: "",
-                                                      attachments: NSData(),
+                                                      phases: [],
                                                       createdOn: Date(),
                                                       changedOn: Date(),
                                                       createdBy: "John Smith")]))
@@ -65,17 +65,17 @@ struct ProjectView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .lineLimit(1)
                 .minimumScaleFactor(0.1)
-                .font(.system(size: 24, weight: .bold))
+                .font(.title2.bold())
             HStack {
                 Text("by \(project.createdBy)")
                     .lineLimit(1)
                     .minimumScaleFactor(0.1)
-                    .font(.system(size: 16, weight: .regular).italic())
+                    .font(.title3.italic())
                 Spacer()
                 Text(project.changedOn.toString(withFormat: "MM/dd/yyyy hh:mm:ss a"))
                     .lineLimit(1)
                     .minimumScaleFactor(0.1)
-                    .font(.system(size: 16, weight: .regular))
+                    .font(.title3)
             }
         }
         .padding([.leading, .trailing], 8.0)

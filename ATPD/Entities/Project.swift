@@ -9,20 +9,33 @@ import Foundation
 import CoreData
 
 struct Project: Hashable {
+    let id = UUID().uuidString
+    
     var title: String
     var body: String
-    var attachments: NSData
+    var phases: [Phase]
     
     var createdOn: Date
     var changedOn: Date
     var createdBy: String
     
+    static func == (lhs: Project, rhs: Project) -> Bool {
+        return  (lhs.title == rhs.title) &&
+                (lhs.body == rhs.body) &&
+                (lhs.createdOn == rhs.createdOn) &&
+                (lhs.changedOn == rhs.changedOn) &&
+                (lhs.createdBy == rhs.createdBy)
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    func saveToCoreData() throws {
+        fatalError("not implemented yet")
+    }
+    
     static func deserialize(from managedObject: NSManagedObject) throws -> Project {
-        return .init(title: managedObject.value(forKey: "") as! String,
-                     body: managedObject.value(forKey: "") as! String,
-                     attachments: managedObject.value(forKey: "") as! NSData,
-                     createdOn: managedObject.value(forKey: "") as! Date,
-                     changedOn: managedObject.value(forKey: "") as! Date,
-                     createdBy: managedObject.value(forKey: "") as! String)
+        fatalError("not implemented yet")
     }
 }

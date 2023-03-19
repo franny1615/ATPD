@@ -62,6 +62,10 @@ extension AppDelegate: UISceneDelegate {
         window.rootViewController = UIHostingController(rootView: ProjectView(viewmodel: projectViewModel))
         window.makeKeyAndVisible()
         
+        let context = persistentContainer.viewContext
+        let project = NSEntityDescription.entity(forEntityName: "Projects", in: context)
+        
+        
         self.window = window
     }
 
