@@ -43,6 +43,6 @@ class ProjectViewModel: ObservableObject {
             return .init(project: selectedProject)
         }
         
-        fatalError("not implemented yet")
+        return .init(project: .init(title: "", body: "", phases: [], createdOn: Date(), changedOn: Date(), createdBy: ""))
     }
 }

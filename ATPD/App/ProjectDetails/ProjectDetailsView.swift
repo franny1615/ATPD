@@ -29,16 +29,14 @@ struct ProjectDetailsView: View {
     @StateObject var viewmodel: ProjectDetailsViewModel
     
     var body: some View {
-        VStack {
-            projectDataEntry
-        }
-        .navigationTitle(viewmodel.project.title.isEmpty ? "New Project": viewmodel.project.title)
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                optionsMenu
+        projectDataEntry
+            .navigationTitle(viewmodel.project.title.isEmpty ? "New Project": viewmodel.project.title)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    optionsMenu
+                }
             }
-        }
     }
     
     // MARK: - Menu Options
@@ -71,55 +69,66 @@ struct ProjectDetailsView: View {
     }
     
     private var deleteProject: some View {
-        Button {
+        Button(role: .destructive) {
             // TODO: viewmodel should delete the project from core data
             dismiss()
         } label: {
             Label("Delete", systemImage: "trash")
-                .foregroundColor(Color.red)
         }
     }
     
     // MARK: - Project Data Entry
     private var projectDataEntry: some View {
-        Form {
+        List {
             projectTitleEntry
+                .listRowSeparator(.hidden)
             projectBodyEntry
+                .listRowSeparator(.hidden)
             phasesEntry
+                .listRowSeparator(.hidden)
         }
+        .listStyle(.plain)
+        .scrollDismissesKeyboard(.immediately)
     }
     
     private var projectTitleEntry: some View {
-        Section {
+        GroupBox {
             TextField("", text: $viewmodel.project.title)
                 .font(.title3)
-        } header: {
-            Text("Project Title").font(.title3)
+                .textFieldStyle(.roundedBorder)
+        } label: {
+            Text("Project Title").font(.title3).bold()
         }
     }
     
     private var projectBodyEntry: some View {
-        Section {
+        GroupBox {
             TextEditor(text: $viewmodel.project.body)
                 .font(.title3)
                 .lineLimit(3)
                 .frame(height: 100)
-        } header: {
-            Text("Description").font(.title3)
+                .padding(4)
+                .background(Color(uiColor: .systemBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 5.0))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 5.0).stroke(Color.secondary, lineWidth: 0.1)
+                }
+        } label: {
+            Text("Description").font(.title3).bold()
         }
     }
     
     private var phasesEntry: some View {
-        Section {
+        GroupBox {
             ForEach(0..<viewmodel.project.phases.count, id: \.self) { index in
                 displayPhase(at: index)
             }
-        } header: {
+        } label: {
             HStack {
-                Text("Phases").font(.title3)
+                Text("Phases").font(.title3).bold()
                 Spacer()
                 addButton {
-                    // TODO: add phase
+                    viewmodel.addPhase()
                 }
             }
         }
@@ -134,49 +143,63 @@ struct ProjectDetailsView: View {
     }
     
     private func displayPhase(at index: Int) -> some View {
-        Form {
-            Section {
-                TextField("", text: $viewmodel.project.phases[index].title)
-                    .font(.title2)
-            } header: {
-                Text("Phase Title")
-                    .font(.title2)
-            }
-            
-            Section {
+        GroupBox {
+            VStack(spacing: 8) {
                 TextEditor(text: $viewmodel.project.phases[index].description)
-                    .font(.title2)
+                    .font(.title3)
+                    .lineLimit(3)
                     .frame(height: 100)
-            } header: {
-                Text("Description")
-                    .font(.title2)
-            }
-            
-            Section {
-                ScrollView(.horizontal) {
-                    HStack(alignment: .center, spacing: 8.0) {
-                        ForEach(viewmodel.project.phases[index].attachments, id: \.self) { base64AttStr in
-                            if let data = Data(base64Encoded: base64AttStr),
-                               let uiImage = UIImage(data: data) {
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .frame(width: 50, height: 50)
+                    .padding(4)
+                    .background(Color(uiColor: .systemBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 5.0))
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 5.0).stroke(Color.secondary, lineWidth: 0.1)
+                    }
+                    .foregroundColor(viewmodel.project.phases[index].description == phaseDescPlaceholder ? .secondary: .primary)
+                    .onTapGesture {
+                        viewmodel.project.phases[index].description = ""
+                    }
+                
+                VStack {
+                    HStack {
+                        Text("Attachments")
+                            .font(.title3).bold()
+                        Spacer()
+                        addButton {
+                            // TODO: add attachment
+                        }
+                    }
+                    
+                    ScrollView(.horizontal) {
+                        HStack(alignment: .center, spacing: 8.0) {
+                            ForEach(viewmodel.project.phases[index].attachments, id: \.self) { base64AttStr in
+                                if let data = Data(base64Encoded: base64AttStr),
+                                   let uiImage = UIImage(data: data) {
+                                    Image(uiImage: uiImage)
+                                        .resizable()
+                                        .frame(width: 50, height: 50)
+                                }
                             }
                         }
                     }
+                    .frame(height: 100)
                 }
-                .frame(height: 100)
-            } header: {
-                HStack {
-                    Text("Attachments")
-                        .font(.title2)
-                    Spacer()
-                    addButton {
-                        // TODO: add attachment
-                    }
+            }
+        } label: {
+            HStack {
+                TextField("Enter a phase title",
+                          text: $viewmodel.project.phases[index].title,
+                          prompt: Text("Phase Title"))
+                .font(.title3).bold()
+                
+                Spacer()
+                
+                Button(role: .destructive) {
+                    viewmodel.deletePhase(at: index)
+                } label: {
+                    Label("", systemImage: "trash")
                 }
             }
         }
-        .frame(height: 500)
     }
 }
