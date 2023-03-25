@@ -35,10 +35,7 @@ struct ProjectDetailsView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    HStack {
-                        saveProject
-                        optionsMenu
-                    }
+                    optionsMenu
                 }
             }
             .sheet(isPresented: $viewmodel.showCameraView) {
@@ -49,6 +46,7 @@ struct ProjectDetailsView: View {
     // MARK: - Menu Options
     private var optionsMenu: some View {
         Menu {
+            saveProject
             exportAsJsonButton
             exportAsPDFButton
             deleteProject
@@ -89,7 +87,7 @@ struct ProjectDetailsView: View {
             viewmodel.saveProject()
             dismiss()
         } label: {
-            Label("", systemImage: "arrow.down.circle.fill")
+            Label("Save", systemImage: "arrow.up.circle")
         }
     }
     
