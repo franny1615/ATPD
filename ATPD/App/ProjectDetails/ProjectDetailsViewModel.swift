@@ -36,6 +36,7 @@ class ProjectDetailsViewModel: ObservableObject {
             .store(in: &subscriptions)
     }
     
+    // MARK: - Phase Logic
     func addPhase() {
         project.phases.append(Phase(isComplete: false,
                                     title: "",
@@ -66,5 +67,14 @@ class ProjectDetailsViewModel: ObservableObject {
             print("❗️\(error.domain) : \(error.localizedDescription)")
             #endif
         }
+    }
+    
+    // MARK: - Project Logic
+    func saveProject() {
+        
+    }
+    
+    func deleteProject() {
+        
     }
 }

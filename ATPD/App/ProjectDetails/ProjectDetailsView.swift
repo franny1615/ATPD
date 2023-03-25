@@ -35,7 +35,10 @@ struct ProjectDetailsView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    optionsMenu
+                    HStack {
+                        saveProject
+                        optionsMenu
+                    }
                 }
             }
             .sheet(isPresented: $viewmodel.showCameraView) {
@@ -74,10 +77,19 @@ struct ProjectDetailsView: View {
     
     private var deleteProject: some View {
         Button(role: .destructive) {
-            // TODO: viewmodel should delete the project from core data
+            viewmodel.deleteProject()
             dismiss()
         } label: {
             Label("Delete", systemImage: "trash")
+        }
+    }
+    
+    private var saveProject: some View {
+        Button {
+            viewmodel.saveProject()
+            dismiss()
+        } label: {
+            Label("", systemImage: "arrow.down.circle.fill")
         }
     }
     
