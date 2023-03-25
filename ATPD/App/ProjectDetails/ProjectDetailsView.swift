@@ -164,33 +164,31 @@ struct ProjectDetailsView: View {
                         viewmodel.project.phases[index].description = ""
                     }
                 
-                VStack {
-                    HStack {
-                        Text("Attachments")
-                            .font(.title3).bold()
-                        Spacer()
-                        addButton {
-                            viewmodel.takePictureForPhase(at: index)
-                        }
+                HStack {
+                    Text("Attachments")
+                        .font(.title3).bold()
+                    Spacer()
+                    addButton {
+                        viewmodel.takePictureForPhase(at: index)
                     }
-                    
-                    ScrollView(.horizontal) {
-                        HStack(alignment: .center, spacing: 8.0) {
-                            ForEach(viewmodel.project.phases[index].attachments, id: \.self) { uiImage in
-                                Button {
-                                    viewmodel.previewImage(uiImage: uiImage)
-                                } label: {
-                                    Image(uiImage: uiImage)
-                                        .resizable()
-                                        .frame(width: 95, height: 95)
-                                        .clipShape(RoundedRectangle(cornerRadius: 5.0))
-                                }
-                                .quickLookPreview($viewmodel.previewUrl)
-                            }
-                        }
-                    }
-                    .frame(height: 100)
                 }
+                
+                ScrollView(.horizontal) {
+                    HStack(alignment: .center, spacing: 8.0) {
+                        ForEach(viewmodel.project.phases[index].attachments, id: \.self) { uiImage in
+                            Button {
+                                viewmodel.previewImage(uiImage: uiImage)
+                            } label: {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .frame(width: 95, height: 95)
+                                    .clipShape(RoundedRectangle(cornerRadius: 5.0))
+                            }
+                            .quickLookPreview($viewmodel.previewUrl)
+                        }
+                    }
+                }
+                .frame(height: 100)
             }
         } label: {
             HStack {
