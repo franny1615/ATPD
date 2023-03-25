@@ -37,6 +37,9 @@ struct ProjectDetailsView: View {
                     optionsMenu
                 }
             }
+            .sheet(isPresented: $viewmodel.showCameraView) {
+                CameraView(image: $viewmodel.takenImage)
+            }
     }
     
     // MARK: - Menu Options
@@ -166,7 +169,7 @@ struct ProjectDetailsView: View {
                             .font(.title3).bold()
                         Spacer()
                         addButton {
-                            // TODO: add attachment
+                            viewmodel.takePictureForPhase(at: index)
                         }
                     }
                     
