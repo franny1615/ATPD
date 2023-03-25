@@ -5,6 +5,7 @@
 //  Created by Francisco F on 3/17/23.
 //
 
+import QuickLook
 import SwiftUI
 
 struct ProjectDetailsView_Preview: PreviewProvider {
@@ -175,13 +176,16 @@ struct ProjectDetailsView: View {
                     
                     ScrollView(.horizontal) {
                         HStack(alignment: .center, spacing: 8.0) {
-                            ForEach(viewmodel.project.phases[index].attachments, id: \.self) { base64AttStr in
-                                if let data = Data(base64Encoded: base64AttStr),
-                                   let uiImage = UIImage(data: data) {
+                            ForEach(viewmodel.project.phases[index].attachments, id: \.self) { uiImage in
+                                Button {
+                                    viewmodel.previewImage(uiImage: uiImage)
+                                } label: {
                                     Image(uiImage: uiImage)
                                         .resizable()
-                                        .frame(width: 50, height: 50)
+                                        .frame(width: 95, height: 95)
+                                        .clipShape(RoundedRectangle(cornerRadius: 5.0))
                                 }
+                                .quickLookPreview($viewmodel.previewUrl)
                             }
                         }
                     }

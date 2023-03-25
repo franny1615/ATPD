@@ -18,6 +18,8 @@ class ProjectDetailsViewModel: ObservableObject {
     @Published var takenImage: UIImage?
     private var currentPhaseIndex = 0
     
+    @Published var previewUrl: URL?
+    
     init(project: Project) {
         self.project = project
         
@@ -27,9 +29,8 @@ class ProjectDetailsViewModel: ObservableObject {
     private func bindImageChange() {
         $takenImage
             .sink { image in
-                if let image = image,
-                   let base64 = image.jpegData(compressionQuality: 0.0)?.base64EncodedString() {
-                    self.project.phases[self.currentPhaseIndex].attachments.append(base64)
+                if let image = image {
+                    self.project.phases[self.currentPhaseIndex].attachments.append(image)
                 }
             }
             .store(in: &subscriptions)
@@ -49,5 +50,21 @@ class ProjectDetailsViewModel: ObservableObject {
     func takePictureForPhase(at index: Int) {
         currentPhaseIndex = index
         showCameraView = true
+    }
+    
+    func previewImage(uiImage: UIImage) {
+        let tempDirectory = FileManager.default.temporaryDirectory
+        let path = tempDirectory.appendingPathComponent("Preview").appendingPathExtension(".jpg")
+        
+        do {
+            let data = uiImage.jpegData(compressionQuality: 0.0)
+            try data?.write(to: path, options: .atomic)
+            self.previewUrl = path
+        } catch {
+            #if DEBUG
+            let error = error as NSError
+            print("❗️\(error.domain) : \(error.localizedDescription)")
+            #endif
+        }
     }
 }

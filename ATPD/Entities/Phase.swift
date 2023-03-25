@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 struct Phase: Hashable {
     var isComplete: Bool
     var title: String
     var description: String
-    var attachments: [String]
+    var attachments: [UIImage]
 }
