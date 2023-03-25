@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0151026629C16A1F00DB625B /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151026529C16A1F00DB625B /* Project.swift */; };
 		0151AE8429CF6DAF00888B50 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151AE8329CF6DAF00888B50 /* CameraView.swift */; };
+		0151AE8729CF828E00888B50 /* PhaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151AE8629CF828E00888B50 /* PhaseView.swift */; };
+		0151AE8929CF82DC00888B50 /* ViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151AE8829CF82DC00888B50 /* ViewHelper.swift */; };
 		015A53DD29C000B1003BFC19 /* ATPDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015A53DC29C000B1003BFC19 /* ATPDTests.swift */; };
 		015A53F829C00357003BFC19 /* FakeAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015A53F729C00357003BFC19 /* FakeAppDelegate.swift */; };
 		015A540229C004D9003BFC19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 015A53FA29C004D9003BFC19 /* Assets.xcassets */; };
@@ -38,6 +40,8 @@
 /* Begin PBXFileReference section */
 		0151026529C16A1F00DB625B /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		0151AE8329CF6DAF00888B50 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		0151AE8629CF828E00888B50 /* PhaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseView.swift; sourceTree = "<group>"; };
+		0151AE8829CF82DC00888B50 /* ViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelper.swift; sourceTree = "<group>"; };
 		015A53BF29C000B0003BFC19 /* ATPD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ATPD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		015A53D829C000B1003BFC19 /* ATPDTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ATPDTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		015A53DC29C000B1003BFC19 /* ATPDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATPDTests.swift; sourceTree = "<group>"; };
@@ -87,17 +91,10 @@
 		0151AE8129CF6D9C00888B50 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0151AE8229CF6DA400888B50 /* Camera */,
+				0151AE8329CF6DAF00888B50 /* CameraView.swift */,
+				0151AE8829CF82DC00888B50 /* ViewHelper.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		0151AE8229CF6DA400888B50 /* Camera */ = {
-			isa = PBXGroup;
-			children = (
-				0151AE8329CF6DAF00888B50 /* CameraView.swift */,
-			);
-			path = Camera;
 			sourceTree = "<group>";
 		};
 		015A53B629C000B0003BFC19 = {
@@ -176,6 +173,7 @@
 			children = (
 				0167B02029C56C8700657642 /* ProjectDetailsView.swift */,
 				0167B02229C56C9100657642 /* ProjectDetailsViewModel.swift */,
+				0151AE8629CF828E00888B50 /* PhaseView.swift */,
 			);
 			path = ProjectDetails;
 			sourceTree = "<group>";
@@ -287,6 +285,8 @@
 				0167B01E29C5646800657642 /* Date.swift in Sources */,
 				0167B02129C56C8700657642 /* ProjectDetailsView.swift in Sources */,
 				0167B02329C56C9100657642 /* ProjectDetailsViewModel.swift in Sources */,
+				0151AE8929CF82DC00888B50 /* ViewHelper.swift in Sources */,
+				0151AE8729CF828E00888B50 /* PhaseView.swift in Sources */,
 				015A540E29C006E9003BFC19 /* ProjectView.swift in Sources */,
 				0151AE8429CF6DAF00888B50 /* CameraView.swift in Sources */,
 				015A540729C004D9003BFC19 /* ATPD.xcdatamodeld in Sources */,
