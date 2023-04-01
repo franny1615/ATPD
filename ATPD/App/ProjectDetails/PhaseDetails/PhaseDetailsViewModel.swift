@@ -20,7 +20,7 @@ class PhaseDetailsViewModel: ObservableObject {
     @Published var takenImage: UIImage?
     @Published var previewUrl: URL?
     
-    @Published var attachments: [Attachment]?
+    @Published var attachments: [Attachment] = []
     var deletePhase: (() -> Void)?
     
     init(phase: Phase,
@@ -44,7 +44,7 @@ class PhaseDetailsViewModel: ObservableObject {
     }
     
     func fetchExistingImages() {
-        self.attachments = phase.attachments.allObjects as? [Attachment]
+        self.attachments = (phase.attachments.allObjects as? [Attachment]) ?? []
     }
     
     func takePicture() {
@@ -69,5 +69,10 @@ class PhaseDetailsViewModel: ObservableObject {
             print("❗️\(error.domain) : \(error.localizedDescription)")
             #endif
         }
+    }
+    
+    func delete(_ attachement: Attachment) {
+        self.phase.removeFromAttachments(attachement)
+        self.fetchExistingImages()
     }
 }

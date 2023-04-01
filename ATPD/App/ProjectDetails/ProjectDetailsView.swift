@@ -27,6 +27,16 @@ struct ProjectDetailsView: View {
             .navigationTitle(viewmodel.project.title.isEmpty ? "New Project": viewmodel.project.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        if viewmodel.deleteProjectIfEmpty() {
+                            dismiss()
+                        }
+                    } label: {
+                        Label("", systemImage: "arrow.backward")
+                    }
+                }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     optionsMenu
                 }
@@ -37,6 +47,7 @@ struct ProjectDetailsView: View {
             } message: {
                 Text(viewmodel.error?.localizedDescription ?? "Some error occurred without description.")
             }
+            .navigationBarBackButtonHidden()
     }
     
     // MARK: - Menu Options
@@ -71,8 +82,9 @@ struct ProjectDetailsView: View {
     
     private var deleteProject: some View {
         Button(role: .destructive) {
-            viewmodel.deleteProject()
-            dismiss()
+            if viewmodel.deleteProject() {
+                dismiss()
+            }
         } label: {
             Label("Delete", systemImage: "trash")
         }
@@ -90,17 +102,13 @@ struct ProjectDetailsView: View {
     
     // MARK: - Project Data Entry
     private var projectDataEntry: some View {
-        List {
+        ScrollView(.vertical) {
             projectTitleEntry
-                .listRowSeparator(.hidden)
             createdByEntry
-                .listRowSeparator(.hidden)
             projectBodyEntry
-                .listRowSeparator(.hidden)
             phasesEntry
-                .listRowSeparator(.hidden)
         }
-        .listStyle(.plain)
+        .padding([.leading, .trailing], 8.0)
         .scrollDismissesKeyboard(.immediately)
     }
     

@@ -18,6 +18,7 @@ extension Phase {
     @NSManaged public var isComplete: Bool
     @NSManaged public var phaseDescription: String
     @NSManaged public var title: String
+    @NSManaged public var addedOn: Date
     @NSManaged public var attachments: NSSet
     @NSManaged public var project: Project
 }
@@ -37,4 +38,4 @@ extension Phase {
     @NSManaged public func removeFromAttachments(_ values: NSSet)
 }
 
-extension Phase : Identifiable {}
+extension Phase : Identifiable { }

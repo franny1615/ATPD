@@ -5,11 +5,12 @@
         <relationship name="phase" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Phase" inverseName="attachments" inverseEntity="Phase"/>
     </entity>
     <entity name="Phase" representedClassName="Phase" syncable="YES">
+        <attribute name="addedOn" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isComplete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="phaseDescription" attributeType="String" defaultValueString=""/>
         <attribute name="title" attributeType="String" defaultValueString=""/>
         <relationship name="attachments" toMany="YES" deletionRule="Nullify" destinationEntity="Attachment" inverseName="phase" inverseEntity="Attachment"/>
-        <relationship name="project" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="phases" inverseEntity="Project"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="phases" inverseEntity="Project"/>
     </entity>
     <entity name="Project" representedClassName="Project" syncable="YES">
         <attribute name="body" attributeType="String" defaultValueString=""/>

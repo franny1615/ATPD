@@ -51,7 +51,7 @@ struct ProjectView: View {
                     display(viewmodel.projects[index])
                 })
                 .listRowSeparator(.hidden)
-                .listRowInsets(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
+                .listRowInsets(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
             }
         }
         .listStyle(.plain)

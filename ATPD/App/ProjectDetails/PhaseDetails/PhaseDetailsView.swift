@@ -23,10 +23,6 @@ struct PhaseDetailsView: View {
                     .overlay {
                         RoundedRectangle(cornerRadius: 5.0).stroke(Color.secondary, lineWidth: 0.1)
                     }
-                    .foregroundColor(viewModel.phase.phaseDescription == phaseDescPlaceholder ? .secondary: .primary)
-                    .onTapGesture {
-                        viewModel.phase.phaseDescription = ""
-                    }
                 
                 HStack {
                     Text("Attachments")
@@ -39,18 +35,23 @@ struct PhaseDetailsView: View {
                 
                 ScrollView(.horizontal) {
                     HStack(alignment: .center, spacing: 8.0) {
-                        if let attachments = viewModel.attachments {
-                            ForEach(0..<attachments.count, id: \.self) { index in
-                                if let uiImage = viewModel.dataToImage(for: attachments[index]) {
-                                    Button {
-                                        viewModel.previewImage(uiImage: uiImage)
+                        ForEach(0..<viewModel.attachments.count, id: \.self) { index in
+                            if let uiImage = viewModel.dataToImage(for: viewModel.attachments[index]) {
+                                Button {
+                                    viewModel.previewImage(uiImage: uiImage)
+                                } label: {
+                                    Image(uiImage: uiImage)
+                                        .resizable()
+                                        .frame(width: 95, height: 95)
+                                        .clipShape(RoundedRectangle(cornerRadius: 5.0))
+                                }
+                                .quickLookPreview($viewModel.previewUrl)
+                                .contextMenu {
+                                    Button(role: .destructive) {
+                                        viewModel.delete(viewModel.attachments[index])
                                     } label: {
-                                        Image(uiImage: uiImage)
-                                            .resizable()
-                                            .frame(width: 95, height: 95)
-                                            .clipShape(RoundedRectangle(cornerRadius: 5.0))
+                                        Label("Delete", systemImage: "trash")
                                     }
-                                    .quickLookPreview($viewModel.previewUrl)
                                 }
                             }
                         }

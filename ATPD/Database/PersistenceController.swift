@@ -17,8 +17,9 @@ struct PersistenceController {
         
         container.loadPersistentStores { storeDescription, error in
             #if DEBUG
-            let error = error as? NSError
-            print("❗️\(error?.domain ?? "DOMAIN") : \(error?.localizedDescription ?? "")")
+            if let error = error as? NSError {
+                print("❗️\(error.domain) : \(error.localizedDescription)")
+            }
             #endif
         }
     }
