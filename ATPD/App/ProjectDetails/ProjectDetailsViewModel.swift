@@ -6,75 +6,50 @@
 //
 
 import Combine
+import CoreData
 import SwiftUI
 
 let phaseDescPlaceholder = "Description"
 
 class ProjectDetailsViewModel: ObservableObject {
-    private var subscriptions = Set<AnyCancellable>()
+    private var context: NSManagedObjectContext
     @Published var project: Project
-    
-    @Published var showCameraView = false
-    @Published var takenImage: UIImage?
-    private var currentPhaseIndex = 0
-    
-    @Published var previewUrl: URL?
-    
-    init(project: Project) {
+    @Published var phases: [Phase]
+
+    init(persistanceController: PersistenceController = .shared,
+         project: Project) {
+        self.context = persistanceController.container.viewContext
         self.project = project
-        
-        self.bindImageChange()
-    }
-    
-    private func bindImageChange() {
-        $takenImage
-            .sink { image in
-                if let image = image {
-                    self.project.phases[self.currentPhaseIndex].attachments.append(image)
-                }
-            }
-            .store(in: &subscriptions)
+        self.phases = (project.phases.allObjects as? [Phase]) ?? []
     }
     
     // MARK: - Phase Logic
     func addPhase() {
-        project.phases.append(Phase(isComplete: false,
-                                    title: "",
-                                    description: phaseDescPlaceholder,
-                                    attachments: []))
+        let newPhase = Phase(context: context)
+        self.project.addToPhases(newPhase)
+        self.phases = (project.phases.allObjects as? [Phase]) ?? []
     }
     
-    func deletePhase(at index: Int) {
-        project.phases.remove(at: index)
+    func deletePhase(_ phase: Phase) {
+        self.project.removeFromPhases(phase)
+        self.phases = (project.phases.allObjects as? [Phase]) ?? []
     }
     
-    func takePictureForPhase(at index: Int) {
-        currentPhaseIndex = index
-        showCameraView = true
-    }
-    
-    func previewImage(uiImage: UIImage) {
-        let tempDirectory = FileManager.default.temporaryDirectory
-        let path = tempDirectory.appendingPathComponent("Preview").appendingPathExtension(".jpg")
-        
-        do {
-            let data = uiImage.jpegData(compressionQuality: 0.0)
-            try data?.write(to: path, options: .atomic)
-            self.previewUrl = path
-        } catch {
-            #if DEBUG
-            let error = error as NSError
-            print("❗️\(error.domain) : \(error.localizedDescription)")
-            #endif
+    func getPhaseDetailsViewModel(for phase: Phase) -> PhaseDetailsViewModel {
+        let phaseDetailsVM = PhaseDetailsViewModel(phase: phase)
+        phaseDetailsVM.deletePhase = {
+            self.deletePhase(phase)
         }
+        
+        return phaseDetailsVM
     }
     
     // MARK: - Project Logic
     func saveProject() {
-        
+        // TODO: save to core data
     }
     
     func deleteProject() {
-        
+        // TODO: delete from core data
     }
 }

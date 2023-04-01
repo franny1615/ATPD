@@ -9,8 +9,11 @@
 /* Begin PBXBuildFile section */
 		0151026629C16A1F00DB625B /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151026529C16A1F00DB625B /* Project.swift */; };
 		0151AE8429CF6DAF00888B50 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151AE8329CF6DAF00888B50 /* CameraView.swift */; };
-		0151AE8729CF828E00888B50 /* PhaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151AE8629CF828E00888B50 /* PhaseView.swift */; };
+		0151AE8729CF828E00888B50 /* PhaseDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151AE8629CF828E00888B50 /* PhaseDetailsView.swift */; };
 		0151AE8929CF82DC00888B50 /* ViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151AE8829CF82DC00888B50 /* ViewHelper.swift */; };
+		0151AE8B29CFD06B00888B50 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151AE8A29CFD06B00888B50 /* Attachment.swift */; };
+		0151AE8E29CFDD5000888B50 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151AE8D29CFDD5000888B50 /* PersistenceController.swift */; };
+		0151AEC429D0DB2E00888B50 /* PhaseDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151AEC329D0DB2E00888B50 /* PhaseDetailsViewModel.swift */; };
 		015A53DD29C000B1003BFC19 /* ATPDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015A53DC29C000B1003BFC19 /* ATPDTests.swift */; };
 		015A53F829C00357003BFC19 /* FakeAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015A53F729C00357003BFC19 /* FakeAppDelegate.swift */; };
 		015A540229C004D9003BFC19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 015A53FA29C004D9003BFC19 /* Assets.xcassets */; };
@@ -24,6 +27,9 @@
 		0167B01E29C5646800657642 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0167B01D29C5646800657642 /* Date.swift */; };
 		0167B02129C56C8700657642 /* ProjectDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0167B02029C56C8700657642 /* ProjectDetailsView.swift */; };
 		0167B02329C56C9100657642 /* ProjectDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0167B02229C56C9100657642 /* ProjectDetailsViewModel.swift */; };
+		017B99D029D7D2CF0022A64A /* Attachment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B99CA29D7D2CF0022A64A /* Attachment+CoreDataProperties.swift */; };
+		017B99D229D7D2CF0022A64A /* Phase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B99CC29D7D2CF0022A64A /* Phase+CoreDataProperties.swift */; };
+		017B99D429D7D2CF0022A64A /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B99CE29D7D2CF0022A64A /* Project+CoreDataProperties.swift */; };
 		01E84B1E29C6835F00995A6C /* Phase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E84B1D29C6835F00995A6C /* Phase.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,8 +46,11 @@
 /* Begin PBXFileReference section */
 		0151026529C16A1F00DB625B /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		0151AE8329CF6DAF00888B50 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
-		0151AE8629CF828E00888B50 /* PhaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseView.swift; sourceTree = "<group>"; };
+		0151AE8629CF828E00888B50 /* PhaseDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseDetailsView.swift; sourceTree = "<group>"; };
 		0151AE8829CF82DC00888B50 /* ViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelper.swift; sourceTree = "<group>"; };
+		0151AE8A29CFD06B00888B50 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
+		0151AE8D29CFDD5000888B50 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		0151AEC329D0DB2E00888B50 /* PhaseDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseDetailsViewModel.swift; sourceTree = "<group>"; };
 		015A53BF29C000B0003BFC19 /* ATPD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ATPD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		015A53D829C000B1003BFC19 /* ATPDTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ATPDTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		015A53DC29C000B1003BFC19 /* ATPDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATPDTests.swift; sourceTree = "<group>"; };
@@ -58,6 +67,9 @@
 		0167B01D29C5646800657642 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		0167B02029C56C8700657642 /* ProjectDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailsView.swift; sourceTree = "<group>"; };
 		0167B02229C56C9100657642 /* ProjectDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailsViewModel.swift; sourceTree = "<group>"; };
+		017B99CA29D7D2CF0022A64A /* Attachment+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attachment+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		017B99CC29D7D2CF0022A64A /* Phase+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Phase+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		017B99CE29D7D2CF0022A64A /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		01E84B1D29C6835F00995A6C /* Phase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,8 +94,9 @@
 		0151025A29C1677B00DB625B /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				0151026529C16A1F00DB625B /* Project.swift */,
-				01E84B1D29C6835F00995A6C /* Phase.swift */,
+				017B99D729D7D2FF0022A64A /* Project */,
+				017B99D629D7D2F60022A64A /* Phase */,
+				017B99D529D7D2E80022A64A /* Attachment */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -95,6 +108,24 @@
 				0151AE8829CF82DC00888B50 /* ViewHelper.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		0151AE8C29CFDD3E00888B50 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				015A540029C004D9003BFC19 /* ATPD.xcdatamodeld */,
+				0151AE8D29CFDD5000888B50 /* PersistenceController.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		0151AEC229D0DAFE00888B50 /* PhaseDetails */ = {
+			isa = PBXGroup;
+			children = (
+				0151AE8629CF828E00888B50 /* PhaseDetailsView.swift */,
+				0151AEC329D0DB2E00888B50 /* PhaseDetailsViewModel.swift */,
+			);
+			path = PhaseDetails;
 			sourceTree = "<group>";
 		};
 		015A53B629C000B0003BFC19 = {
@@ -128,13 +159,13 @@
 		015A53F929C004D9003BFC19 /* ATPD */ = {
 			isa = PBXGroup;
 			children = (
-				015A540029C004D9003BFC19 /* ATPD.xcdatamodeld */,
 				015A53FF29C004D9003BFC19 /* Info.plist */,
 				015A53FA29C004D9003BFC19 /* Assets.xcassets */,
 				015A53FB29C004D9003BFC19 /* LaunchScreen.storyboard */,
 				015A53FE29C004D9003BFC19 /* main.swift */,
 				015A53FD29C004D9003BFC19 /* AppDelegate.swift */,
 				015A540B29C00645003BFC19 /* App */,
+				0151AE8C29CFDD3E00888B50 /* Database */,
 				0151025A29C1677B00DB625B /* Entities */,
 				0167B01C29C5645B00657642 /* Extensions */,
 			);
@@ -171,11 +202,38 @@
 		0167B01F29C56C5D00657642 /* ProjectDetails */ = {
 			isa = PBXGroup;
 			children = (
+				0151AEC229D0DAFE00888B50 /* PhaseDetails */,
 				0167B02029C56C8700657642 /* ProjectDetailsView.swift */,
 				0167B02229C56C9100657642 /* ProjectDetailsViewModel.swift */,
-				0151AE8629CF828E00888B50 /* PhaseView.swift */,
 			);
 			path = ProjectDetails;
+			sourceTree = "<group>";
+		};
+		017B99D529D7D2E80022A64A /* Attachment */ = {
+			isa = PBXGroup;
+			children = (
+				0151AE8A29CFD06B00888B50 /* Attachment.swift */,
+				017B99CA29D7D2CF0022A64A /* Attachment+CoreDataProperties.swift */,
+			);
+			path = Attachment;
+			sourceTree = "<group>";
+		};
+		017B99D629D7D2F60022A64A /* Phase */ = {
+			isa = PBXGroup;
+			children = (
+				01E84B1D29C6835F00995A6C /* Phase.swift */,
+				017B99CC29D7D2CF0022A64A /* Phase+CoreDataProperties.swift */,
+			);
+			path = Phase;
+			sourceTree = "<group>";
+		};
+		017B99D729D7D2FF0022A64A /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				0151026529C16A1F00DB625B /* Project.swift */,
+				017B99CE29D7D2CF0022A64A /* Project+CoreDataProperties.swift */,
+			);
+			path = Project;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,9 +342,15 @@
 				015A540529C004D9003BFC19 /* main.swift in Sources */,
 				0167B01E29C5646800657642 /* Date.swift in Sources */,
 				0167B02129C56C8700657642 /* ProjectDetailsView.swift in Sources */,
+				017B99D429D7D2CF0022A64A /* Project+CoreDataProperties.swift in Sources */,
+				017B99D029D7D2CF0022A64A /* Attachment+CoreDataProperties.swift in Sources */,
 				0167B02329C56C9100657642 /* ProjectDetailsViewModel.swift in Sources */,
+				017B99D229D7D2CF0022A64A /* Phase+CoreDataProperties.swift in Sources */,
 				0151AE8929CF82DC00888B50 /* ViewHelper.swift in Sources */,
-				0151AE8729CF828E00888B50 /* PhaseView.swift in Sources */,
+				0151AE8729CF828E00888B50 /* PhaseDetailsView.swift in Sources */,
+				0151AE8B29CFD06B00888B50 /* Attachment.swift in Sources */,
+				0151AEC429D0DB2E00888B50 /* PhaseDetailsViewModel.swift in Sources */,
+				0151AE8E29CFDD5000888B50 /* PersistenceController.swift in Sources */,
 				015A540E29C006E9003BFC19 /* ProjectView.swift in Sources */,
 				0151AE8429CF6DAF00888B50 /* CameraView.swift in Sources */,
 				015A540729C004D9003BFC19 /* ATPD.xcdatamodeld in Sources */,

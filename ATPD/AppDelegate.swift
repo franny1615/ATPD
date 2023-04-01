@@ -10,18 +10,6 @@ import SwiftUI
 import UIKit
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "ATPD")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                #if DEBUG
-                print("❗️\(error.domain) : \(error.localizedDescription)")
-                #endif
-            }
-        })
-        return container
-    }()
-    
     private var projectViewModel: ProjectViewModel!
     var window: UIWindow?
     
@@ -35,44 +23,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-// MARK: - CoreData
-extension AppDelegate {
-    func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let error = error as NSError
-                #if DEBUG
-                print("❗️\(error.domain) : \(error.localizedDescription)")
-                #endif
-            }
-        }
-    }
-}
-
 // MARK: - UISceneDelegate
 extension AppDelegate: UISceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        projectViewModel = .init(projects: [])
+        projectViewModel = .init()
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = UIHostingController(rootView: ProjectView(viewmodel: projectViewModel))
         window.makeKeyAndVisible()
-        
-        let context = persistentContainer.viewContext
-        let project = NSEntityDescription.entity(forEntityName: "Projects", in: context)
-        
         
         self.window = window
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) { }
 
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        saveContext()
-    }
+    func sceneDidEnterBackground(_ scene: UIScene) { }
 }
 

@@ -9,40 +9,29 @@ import CoreData
 import SwiftUI
 
 class ProjectViewModel: ObservableObject {
+    private let context: NSManagedObjectContext
     @Published var projects: [Project]
     
     @Published var error: NSError?
     @Published var showError = false
     
-    init(projects: [Project]) {
+    init(persistanceController: PersistenceController = .shared,
+         projects: [Project] = []) {
         self.projects = projects
+        self.context = persistanceController.container.viewContext
     }
     
     func fetchProjectsFromCoreData(filter: NSPredicate? = nil) {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Projects")
-        request.predicate = filter
-        
-        do {
-            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-                projects = []
-                let context = appDelegate.persistentContainer.viewContext
-                let result = try context.fetch(request)
-                
-                for possibleProject in result as! [NSManagedObject] {
-                    projects.append(try Project.deserialize(from: possibleProject))
-                }
-            }
-        } catch {
-            self.error = error as NSError
-            self.showError = true
-        }
+        fatalError("not implemented yet")
     }
     
     func getProjectDetailsVM(for selectedProject: Project? = nil) -> ProjectDetailsViewModel {
         if let selectedProject = selectedProject {
-            return .init(project: selectedProject)
+            return ProjectDetailsViewModel(project: selectedProject)
         }
         
-        return .init(project: .init(title: "", body: "", phases: [], createdOn: Date(), changedOn: Date(), createdBy: ""))
+        
+        let newProject = Project(context: context)
+        return ProjectDetailsViewModel(project: newProject)
     }
 }

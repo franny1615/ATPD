@@ -10,16 +10,9 @@ import SwiftUI
 
 struct ProjectDetailsView_Preview: PreviewProvider {
     static var previews: some View {
+        let context = PersistenceController.shared.container.viewContext
         NavigationView {
-            ProjectDetailsView(viewmodel: .init(project: .init(title: "My Amazing Project",
-                                                               body: "",
-                                                               phases: [.init(isComplete: false,
-                                                                              title: "Phase One: Start Project",
-                                                                              description: "Design the project",
-                                                                              attachments: [])],
-                                                               createdOn: Date(),
-                                                               changedOn: Date(),
-                                                               createdBy: "John Smith")))
+            ProjectDetailsView(viewmodel: .init(project: .init(context: context)))
         }
         .navigationViewStyle(.stack)
     }
@@ -37,9 +30,6 @@ struct ProjectDetailsView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     optionsMenu
                 }
-            }
-            .sheet(isPresented: $viewmodel.showCameraView) {
-                CameraView(image: $viewmodel.takenImage)
             }
     }
     
@@ -134,8 +124,8 @@ struct ProjectDetailsView: View {
     
     private var phasesEntry: some View {
         GroupBox {
-            ForEach(0..<viewmodel.project.phases.count, id: \.self) { index in
-                PhaseView(viewmodel: viewmodel, index: index)
+            ForEach(viewmodel.phases, id: \.self) { phase in
+                PhaseDetailsView(viewModel: viewmodel.getPhaseDetailsViewModel(for: phase))
             }
         } label: {
             HStack {

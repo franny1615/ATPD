@@ -7,14 +7,13 @@
 
 import SwiftUI
 
-struct PhaseView: View {
-    @ObservedObject var viewmodel: ProjectDetailsViewModel
-    @State var index: Int
+struct PhaseDetailsView: View {
+    @StateObject var viewModel: PhaseDetailsViewModel
     
     var body: some View {
         GroupBox {
             VStack(spacing: 8) {
-                TextEditor(text: $viewmodel.project.phases[index].description)
+                TextEditor(text: $viewModel.phase.phaseDescription)
                     .font(.title3)
                     .lineLimit(3)
                     .frame(height: 100)
@@ -24,9 +23,9 @@ struct PhaseView: View {
                     .overlay {
                         RoundedRectangle(cornerRadius: 5.0).stroke(Color.secondary, lineWidth: 0.1)
                     }
-                    .foregroundColor(viewmodel.project.phases[index].description == phaseDescPlaceholder ? .secondary: .primary)
+                    .foregroundColor(viewModel.phase.phaseDescription == phaseDescPlaceholder ? .secondary: .primary)
                     .onTapGesture {
-                        viewmodel.project.phases[index].description = ""
+                        viewModel.phase.phaseDescription = ""
                     }
                 
                 HStack {
@@ -34,22 +33,26 @@ struct PhaseView: View {
                         .font(.title3).bold()
                     Spacer()
                     ViewHelper.addButton {
-                        viewmodel.takePictureForPhase(at: index)
+                        viewModel.takePicture()
                     }
                 }
                 
                 ScrollView(.horizontal) {
                     HStack(alignment: .center, spacing: 8.0) {
-                        ForEach(viewmodel.project.phases[index].attachments, id: \.self) { uiImage in
-                            Button {
-                                viewmodel.previewImage(uiImage: uiImage)
-                            } label: {
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .frame(width: 95, height: 95)
-                                    .clipShape(RoundedRectangle(cornerRadius: 5.0))
+                        if let attachments = viewModel.attachments {
+                            ForEach(0..<attachments.count, id: \.self) { index in
+                                if let uiImage = viewModel.dataToImage(for: attachments[index]) {
+                                    Button {
+                                        viewModel.previewImage(uiImage: uiImage)
+                                    } label: {
+                                        Image(uiImage: uiImage)
+                                            .resizable()
+                                            .frame(width: 95, height: 95)
+                                            .clipShape(RoundedRectangle(cornerRadius: 5.0))
+                                    }
+                                    .quickLookPreview($viewModel.previewUrl)
+                                }
                             }
-                            .quickLookPreview($viewmodel.previewUrl)
                         }
                     }
                 }
@@ -58,18 +61,21 @@ struct PhaseView: View {
         } label: {
             HStack {
                 TextField("Enter a phase title",
-                          text: $viewmodel.project.phases[index].title,
+                          text: $viewModel.phase.title,
                           prompt: Text("Phase Title"))
                 .font(.title3).bold()
                 
                 Spacer()
                 
                 Button(role: .destructive) {
-                    viewmodel.deletePhase(at: index)
+                    viewModel.deletePhase?()
                 } label: {
                     Label("", systemImage: "trash")
                 }
             }
+        }
+        .sheet(isPresented: $viewModel.showCameraView) {
+            CameraView(image: $viewModel.takenImage)
         }
     }
 }

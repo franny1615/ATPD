@@ -9,12 +9,7 @@ import SwiftUI
 
 struct ProjectView_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectView(viewmodel: .init(projects: [.init(title: "Some Amazing Project",
-                                                      body: "",
-                                                      phases: [],
-                                                      createdOn: Date(),
-                                                      changedOn: Date(),
-                                                      createdBy: "John Smith")]))
+        ProjectView(viewmodel: .init())
     }
 }
 
@@ -46,11 +41,11 @@ struct ProjectView: View {
     
     private var projectList: some View {
         List {
-            ForEach(viewmodel.projects, id: \.self) { project in
+            ForEach(0..<viewmodel.projects.count, id: \.self) { index in
                 NavigationLink(destination: {
-                    ProjectDetailsView(viewmodel: viewmodel.getProjectDetailsVM(for: project))
+                    ProjectDetailsView(viewmodel: viewmodel.getProjectDetailsVM(for: viewmodel.projects[index]))
                 }, label: {
-                    display(project)
+                    display(viewmodel.projects[index])
                 })
                 .listRowSeparator(.hidden)
                 .listRowInsets(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
