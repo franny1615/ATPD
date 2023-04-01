@@ -80,6 +80,15 @@ struct ProjectView: View {
         .padding([.top, .bottom], 4.0)
         .background { Color(uiColor: .systemGray5) }
         .clipShape(RoundedRectangle(cornerRadius: 5.0))
+        .contextMenu {
+            Button(role: .destructive) {
+                if viewmodel.delete(project) {
+                    viewmodel.fetchProjectsFromCoreData()
+                }
+            } label: {
+                Label("Delete", systemImage: "trash")
+            }
+        }
     }
     
     private var dismissErrorButton: some View {

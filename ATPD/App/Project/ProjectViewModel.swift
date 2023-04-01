@@ -41,4 +41,20 @@ class ProjectViewModel: ObservableObject {
         newProject.createdOn = Date()
         return ProjectDetailsViewModel(project: newProject)
     }
+    
+    func delete(_ project: Project) -> Bool {
+        self.context.delete(project)
+        return self.saveToCoreData()
+    }
+    
+    private func saveToCoreData() -> Bool {
+        do {
+            try self.context.save()
+            return true
+        } catch {
+            self.error = error as NSError
+            self.showError = true
+            return false
+        }
+    }
 }
