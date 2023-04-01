@@ -21,8 +21,14 @@ class ProjectViewModel: ObservableObject {
         self.context = persistanceController.container.viewContext
     }
     
-    func fetchProjectsFromCoreData(filter: NSPredicate? = nil) {
-        fatalError("not implemented yet")
+    func fetchProjectsFromCoreData() {
+        do {
+            let fetchRequest = Project.fetchRequest() as NSFetchRequest<Project>
+            self.projects = try context.fetch(fetchRequest)
+        } catch {
+            self.error = error as NSError
+            self.showError = true
+        }
     }
     
     func getProjectDetailsVM(for selectedProject: Project? = nil) -> ProjectDetailsViewModel {
@@ -32,6 +38,7 @@ class ProjectViewModel: ObservableObject {
         
         
         let newProject = Project(context: context)
+        newProject.createdOn = Date()
         return ProjectDetailsViewModel(project: newProject)
     }
 }

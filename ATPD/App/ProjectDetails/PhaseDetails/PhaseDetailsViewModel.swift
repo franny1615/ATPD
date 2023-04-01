@@ -6,10 +6,12 @@
 //
 
 import Combine
+import CoreData
 import Foundation
 import SwiftUI
 
 class PhaseDetailsViewModel: ObservableObject {
+    private let context: NSManagedObjectContext
     private var subscriptions = Set<AnyCancellable>()
     
     @Published var phase: Phase
@@ -21,8 +23,10 @@ class PhaseDetailsViewModel: ObservableObject {
     @Published var attachments: [Attachment]?
     var deletePhase: (() -> Void)?
     
-    init(phase: Phase) {
+    init(phase: Phase,
+         persistenceController: PersistenceController = .shared) {
         self.phase = phase
+        self.context = persistenceController.container.viewContext
         self.bindImageChange()
     }
     
@@ -30,14 +34,17 @@ class PhaseDetailsViewModel: ObservableObject {
         $takenImage
             .sink { image in
                 if let image = image {
-                    let context = PersistenceController.shared.container.viewContext
-                    let newImage = Attachment(context: context)
+                    let newImage = Attachment(context: self.context)
                     newImage.image = image.jpegData(compressionQuality: 0.0) ?? Data()
                     self.phase.addToAttachments(newImage)
                     self.attachments = (self.phase.attachments.allObjects as? [Attachment]) ?? []
                 }
             }
             .store(in: &subscriptions)
+    }
+    
+    func fetchExistingImages() {
+        self.attachments = phase.attachments.allObjects as? [Attachment]
     }
     
     func takePicture() {

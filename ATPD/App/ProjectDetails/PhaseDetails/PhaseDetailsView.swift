@@ -57,6 +57,10 @@ struct PhaseDetailsView: View {
                     }
                 }
                 .frame(height: 100)
+                
+                Toggle(isOn: $viewModel.phase.isComplete, label: {
+                    Text("Completed?").font(.title3).bold()
+                })
             }
         } label: {
             HStack {
@@ -73,6 +77,9 @@ struct PhaseDetailsView: View {
                     Label("", systemImage: "trash")
                 }
             }
+        }
+        .onAppear {
+            viewModel.fetchExistingImages()
         }
         .sheet(isPresented: $viewModel.showCameraView) {
             CameraView(image: $viewModel.takenImage)

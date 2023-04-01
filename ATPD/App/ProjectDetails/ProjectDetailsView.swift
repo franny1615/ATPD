@@ -31,6 +31,12 @@ struct ProjectDetailsView: View {
                     optionsMenu
                 }
             }
+            .alert(viewmodel.error?.domain ?? "Error",
+                   isPresented: $viewmodel.showError) {
+                Button("OK") { }
+            } message: {
+                Text(viewmodel.error?.localizedDescription ?? "Some error occurred without description.")
+            }
     }
     
     // MARK: - Menu Options
@@ -74,8 +80,9 @@ struct ProjectDetailsView: View {
     
     private var saveProject: some View {
         Button {
-            viewmodel.saveProject()
-            dismiss()
+            if viewmodel.saveProject() {
+                dismiss()
+            }
         } label: {
             Label("Save", systemImage: "arrow.up.circle")
         }
@@ -85,6 +92,8 @@ struct ProjectDetailsView: View {
     private var projectDataEntry: some View {
         List {
             projectTitleEntry
+                .listRowSeparator(.hidden)
+            createdByEntry
                 .listRowSeparator(.hidden)
             projectBodyEntry
                 .listRowSeparator(.hidden)
@@ -102,6 +111,16 @@ struct ProjectDetailsView: View {
                 .textFieldStyle(.roundedBorder)
         } label: {
             Text("Project Title").font(.title3).bold()
+        }
+    }
+    
+    private var createdByEntry: some View {
+        GroupBox {
+            TextField("", text: $viewmodel.project.createdBy)
+                .font(.title3)
+                .textFieldStyle(.roundedBorder)
+        } label: {
+            Text("Created By").font(.title3).bold()
         }
     }
     

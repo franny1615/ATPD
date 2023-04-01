@@ -28,6 +28,9 @@ struct ProjectView: View {
                     addProjectButton
                 }
             }
+            .onAppear {
+                viewmodel.fetchProjectsFromCoreData()
+            }
             .alert(viewmodel.error?.domain ?? "",
                    isPresented: $viewmodel.showError,
                    actions: {
