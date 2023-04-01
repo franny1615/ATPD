@@ -76,6 +76,35 @@ class ProjectDetailsViewModel: ObservableObject {
         }
     }
     
+    func convertProjectToJSON() -> String? {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        do {
+            let data = try encoder.encode(self.project)
+            let jsonString = String(data: data, encoding: .utf8)
+            return jsonString
+        } catch {
+            self.error = error as NSError
+            self.showError = true
+            return nil
+        }
+    }
+    
+    func save(_ jsonString: String) -> URL? {
+        do {
+            let path = FileManager.default.temporaryDirectory
+            let savePath = path.appendingPathComponent("ProjectAsJSON").appendingPathExtension(".json")
+            let data = jsonString.data(using: .utf8)
+            
+            try data?.write(to: savePath, options: .atomic)
+            return savePath
+        } catch {
+            self.error = error as NSError
+            self.showError = true
+            return nil
+        }
+    }
+    
     // MARK: - Save to CoreData
     private func saveToCoreData() -> Bool {
         do {

@@ -21,6 +21,7 @@ struct ProjectDetailsView_Preview: PreviewProvider {
 struct ProjectDetailsView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var viewmodel: ProjectDetailsViewModel
+    @State private var previewUrl: URL?
     
     var body: some View {
         projectDataEntry
@@ -48,6 +49,7 @@ struct ProjectDetailsView: View {
                 Text(viewmodel.error?.localizedDescription ?? "Some error occurred without description.")
             }
             .navigationBarBackButtonHidden()
+            .quickLookPreview($previewUrl)
     }
     
     // MARK: - Menu Options
@@ -64,8 +66,10 @@ struct ProjectDetailsView: View {
     
     private var exportAsJsonButton: some View {
         Button {
-            // TODO: have the viewmodel create json string, write it out to file system,
-            //  show user quicklook preview via url and they can use that to share.
+            if let jsonString = viewmodel.convertProjectToJSON(),
+               let savedJsonFileURL = viewmodel.save(jsonString) {
+                self.previewUrl = savedJsonFileURL
+            }
         } label: {
             Label("Export As JSON", systemImage: "doc.plaintext")
         }

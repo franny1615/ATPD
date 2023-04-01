@@ -39,6 +39,7 @@ class ProjectViewModel: ObservableObject {
         
         let newProject = Project(context: context)
         newProject.createdOn = Date()
+        newProject.changedOn = Date()
         return ProjectDetailsViewModel(project: newProject)
     }
     
