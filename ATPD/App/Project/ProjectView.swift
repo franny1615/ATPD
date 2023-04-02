@@ -56,22 +56,17 @@ struct ProjectView: View {
     }
     
     private func display(_ project: Project) -> some View {
-        VStack {
+        VStack(spacing: 8.0) {
             Text(project.title)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .lineLimit(1)
                 .minimumScaleFactor(0.1)
                 .font(.title2.bold())
             HStack {
-                Text("by \(project.createdBy)")
+                Text("Last Edited \(project.changedOn.toString(withFormat: "MM/dd/yyyy hh:mm:ss a"))")
                     .lineLimit(1)
                     .minimumScaleFactor(0.1)
                     .font(.title3.italic())
-                Spacer()
-                Text(project.changedOn.toString(withFormat: "MM/dd/yyyy hh:mm:ss a"))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.1)
-                    .font(.title3)
             }
         }
         .padding([.leading, .trailing], 8.0)
