@@ -30,6 +30,7 @@
 		017B99D029D7D2CF0022A64A /* Attachment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B99CA29D7D2CF0022A64A /* Attachment+CoreDataProperties.swift */; };
 		017B99D229D7D2CF0022A64A /* Phase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B99CC29D7D2CF0022A64A /* Phase+CoreDataProperties.swift */; };
 		017B99D429D7D2CF0022A64A /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B99CE29D7D2CF0022A64A /* Project+CoreDataProperties.swift */; };
+		017B99DD29D905A50022A64A /* UIGraphicsPDFRendererContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B99DC29D905A50022A64A /* UIGraphicsPDFRendererContext.swift */; };
 		01E84B1E29C6835F00995A6C /* Phase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E84B1D29C6835F00995A6C /* Phase.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		017B99CA29D7D2CF0022A64A /* Attachment+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attachment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		017B99CC29D7D2CF0022A64A /* Phase+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Phase+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		017B99CE29D7D2CF0022A64A /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		017B99DC29D905A50022A64A /* UIGraphicsPDFRendererContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGraphicsPDFRendererContext.swift; sourceTree = "<group>"; };
 		01E84B1D29C6835F00995A6C /* Phase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -195,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				0167B01D29C5646800657642 /* Date.swift */,
+				017B99DC29D905A50022A64A /* UIGraphicsPDFRendererContext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				0151AE8B29CFD06B00888B50 /* Attachment.swift in Sources */,
 				0151AEC429D0DB2E00888B50 /* PhaseDetailsViewModel.swift in Sources */,
 				0151AE8E29CFDD5000888B50 /* PersistenceController.swift in Sources */,
+				017B99DD29D905A50022A64A /* UIGraphicsPDFRendererContext.swift in Sources */,
 				015A540E29C006E9003BFC19 /* ProjectView.swift in Sources */,
 				0151AE8429CF6DAF00888B50 /* CameraView.swift in Sources */,
 				015A540729C004D9003BFC19 /* ATPD.xcdatamodeld in Sources */,

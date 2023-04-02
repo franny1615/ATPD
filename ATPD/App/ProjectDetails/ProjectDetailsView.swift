@@ -77,8 +77,10 @@ struct ProjectDetailsView: View {
     
     private var exportAsPDFButton: some View {
         Button {
-            // TODO: have the viewmodel create pdf, write it out to file system,
-            //  show user quicklook preview via url and they can use that to share.
+            if let pdfData = viewmodel.generatePDF(),
+               let pdfURL = viewmodel.savePDF(pdfData) {
+                self.previewUrl = pdfURL
+            }
         } label: {
             Label("Export As PDF", systemImage: "doc.richtext")
         }
