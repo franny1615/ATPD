@@ -151,15 +151,21 @@ class ProjectDetailsViewModel: ObservableObject {
                                                    indent: defaultIndent + 8.0,
                                                    cursor: cursor,
                                                    pdfSize: pageRect.size)
-                cursor = context.addMultiLineText(text: phase.phaseDescription,
-                                                  indent: defaultIndent + 8.0,
-                                                  cursor: cursor,
-                                                  pdfSize: pageRect.size)
                 cursor = context.addSingleLineText(weight: .bold,
                                                    text: "Has \(phase.isComplete ? "been completed.": " NOT been completed.")",
                                                    indent: defaultIndent + 8.0,
                                                    cursor: cursor,
                                                    pdfSize: pageRect.size)
+                cursor = context.addMultiLineText(text: phase.phaseDescription,
+                                                  indent: defaultIndent + 8.0,
+                                                  cursor: cursor,
+                                                  pdfSize: pageRect.size)
+                for attachment in ((phase.attachments.allObjects as? [Attachment]) ?? []) {
+                    if let uiImage = UIImage(data: attachment.image) {
+                        cursor = context.add(image: uiImage, indent: defaultIndent + 16.0, cursor: cursor, pdfSize: pageRect.size)
+                    }
+                }
+                
                 cursor += 8.0
             }
         }

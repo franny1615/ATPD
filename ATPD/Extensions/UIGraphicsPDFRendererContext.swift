@@ -73,14 +73,25 @@ extension UIGraphicsPDFRendererContext {
         let pdfText = NSAttributedString(string: text,
                                          attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle,
                                                       NSAttributedString.Key.font: textFont])
-        let pdfTextHeight = pdfText.height(withConstrainedWidth: (pdfSize.width - 2) * indent)
+        let pdfTextHeight = pdfText.height(withConstrainedWidth: pdfSize.width - (2 * indent))
         
         let rect = CGRect(x: indent,
                           y: cursor,
-                          width: (pdfSize.width - 2) * indent,
+                          width: pdfSize.width - (2 * indent),
                           height: pdfTextHeight)
         pdfText.draw(in: rect)
 
+        return self.checkContext(cursor: rect.origin.y + rect.size.height, pdfSize: pdfSize)
+    }
+    
+    func add(image: UIImage?,
+             desiredRectSize: CGSize = CGSize(width: 128, height: 128),
+             indent: CGFloat,
+             cursor: CGFloat,
+             pdfSize: CGSize) -> CGFloat {
+        let rect = CGRect(x: indent, y: cursor, width: desiredRectSize.width, height: desiredRectSize.height)
+        image?.draw(in: rect)
+        
         return self.checkContext(cursor: rect.origin.y + rect.size.height, pdfSize: pdfSize)
     }
     
