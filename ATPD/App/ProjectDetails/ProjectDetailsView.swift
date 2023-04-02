@@ -22,6 +22,7 @@ struct ProjectDetailsView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var viewmodel: ProjectDetailsViewModel
     @State private var previewUrl: URL?
+    @FocusState private var inFocus: Int?
     
     var body: some View {
         projectDataEntry
@@ -108,14 +109,28 @@ struct ProjectDetailsView: View {
     
     // MARK: - Project Data Entry
     private var projectDataEntry: some View {
-        ScrollView(.vertical) {
-            projectTitleEntry
-            createdByEntry
-            projectBodyEntry
-            phasesEntry
+        ScrollViewReader { reader in
+            ScrollView(.vertical) {
+                projectTitleEntry.id(0)
+                    .focused($inFocus, equals: 0)
+                createdByEntry.id(1)
+                    .focused($inFocus, equals: 1)
+                projectBodyEntry.id(2)
+                    .focused($inFocus, equals: 2)
+                phasesEntry
+                
+                if let inFocus = inFocus, inFocus == ((viewmodel.phases.count - 1) + 3) {
+                    Color.clear.frame(height: 300)
+                }
+            }
+            .scrollDismissesKeyboard(.immediately)
+            .onChange(of: inFocus) { id in
+                withAnimation {
+                    reader.scrollTo(id)
+                }
+            }
         }
         .padding([.leading, .trailing], 8.0)
-        .scrollDismissesKeyboard(.immediately)
     }
     
     private var projectTitleEntry: some View {
@@ -156,8 +171,9 @@ struct ProjectDetailsView: View {
     
     private var phasesEntry: some View {
         GroupBox {
-            ForEach(viewmodel.phases, id: \.self) { phase in
-                PhaseDetailsView(viewModel: viewmodel.getPhaseDetailsViewModel(for: phase))
+            ForEach(0..<viewmodel.phases.count, id: \.self) { phaseIndex in
+                PhaseDetailsView(viewModel: viewmodel.getPhaseDetailsViewModel(for: viewmodel.phases[phaseIndex])).id(phaseIndex + 3)
+                    .focused($inFocus, equals: phaseIndex + 3)
             }
         } label: {
             HStack {
