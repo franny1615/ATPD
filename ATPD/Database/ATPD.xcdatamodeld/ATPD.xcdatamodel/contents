@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22E252" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Attachment" representedClassName="Attachment" syncable="YES">
+        <attribute name="image" attributeType="Binary"/>
+        <relationship name="phase" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Phase" inverseName="attachments" inverseEntity="Phase"/>
+    </entity>
+    <entity name="Phase" representedClassName="Phase" syncable="YES">
+        <attribute name="addedOn" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isComplete" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="phaseDescription" attributeType="String" defaultValueString=""/>
+        <attribute name="title" attributeType="String" defaultValueString=""/>
+        <relationship name="attachments" toMany="YES" deletionRule="Nullify" destinationEntity="Attachment" inverseName="phase" inverseEntity="Attachment"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="phases" inverseEntity="Project"/>
+    </entity>
+    <entity name="Project" representedClassName="Project" syncable="YES">
+        <attribute name="body" attributeType="String" defaultValueString=""/>
+        <attribute name="changedOn" attributeType="Date" usesScalarValueType="YES"/>
+        <attribute name="createdBy" attributeType="String" defaultValueString=""/>
+        <attribute name="createdOn" attributeType="Date" usesScalarValueType="YES"/>
+        <attribute name="title" attributeType="String" defaultValueString=""/>
+        <relationship name="phases" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Phase" inverseName="project" inverseEntity="Phase"/>
+    </entity>
+</model>
