@@ -143,7 +143,6 @@ struct ProjectDetailsView: View {
             TextEditor(text: $viewmodel.project.body)
                 .font(.title3)
                 .lineLimit(3)
-                .frame(height: 100)
                 .padding(4)
                 .background(Color(uiColor: .systemBackground))
                 .clipShape(RoundedRectangle(cornerRadius: 5.0))

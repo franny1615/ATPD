@@ -18,26 +18,24 @@ struct ProjectView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                projectList
-            }
-            .navigationTitle("Projects")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    addProjectButton
+            projectList
+                .navigationTitle("Projects")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        addProjectButton
+                    }
                 }
-            }
-            .onAppear {
-                viewmodel.fetchProjectsFromCoreData()
-            }
-            .alert(viewmodel.error?.domain ?? "",
-                   isPresented: $viewmodel.showError,
-                   actions: {
-                dismissErrorButton
-            }, message: {
-                Text(viewmodel.error?.localizedDescription ?? "")
-            })
+                .onAppear {
+                    viewmodel.fetchProjectsFromCoreData()
+                }
+                .alert(viewmodel.error?.domain ?? "",
+                       isPresented: $viewmodel.showError,
+                       actions: {
+                    dismissErrorButton
+                }, message: {
+                    Text(viewmodel.error?.localizedDescription ?? "")
+                })
         }
         .navigationViewStyle(.stack)
     }

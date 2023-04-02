@@ -57,7 +57,6 @@ struct PhaseDetailsView: View {
                         }
                     }
                 }
-                .frame(height: 100)
                 
                 Toggle(isOn: $viewModel.phase.isComplete, label: {
                     Text("Completed?").font(.title3).bold()
