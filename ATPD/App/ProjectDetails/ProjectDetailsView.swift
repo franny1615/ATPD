@@ -123,7 +123,7 @@ struct ProjectDetailsView: View {
                     Color.clear.frame(height: 300)
                 }
             }
-            .scrollDismissesKeyboard(.immediately)
+            .scrollDismissesKeyboard(.interactively)
             .onChange(of: inFocus) { id in
                 withAnimation {
                     reader.scrollTo(id)
